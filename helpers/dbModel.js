@@ -3,7 +3,8 @@ const bcrypt = require('bcryptjs');
 
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    getUsers
 }
 
 function registerUser(user){
@@ -19,4 +20,8 @@ async function loginUser(user){
     } else {
         return null
     }   
+}
+
+function getUsers(){
+    return db('users')
 }
