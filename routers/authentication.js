@@ -14,4 +14,19 @@ router.post('/register', async (req,res) => {
     }
 })
 
+router.post('/login', async (req,res) => {
+    try {
+        const user = req.body;
+        const result = await db.loginUser(user)
+        if(result){
+            res.status(200).json({message: `Logged in`})
+        } else {
+            res.status(401).json({message: 'You shall not pass!'})
+        }       
+    }
+    catch (error){
+        res.status(500).json({error: `An error occurred during login. ${error}`})
+    }
+})
+
 module.exports = router;
