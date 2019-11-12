@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import {Route} from 'react-router-dom';
 import LoginForm from './components/LoginForm';
+import Users from './components/Users';
 import './App.css';
 
 function App() {
@@ -26,7 +28,17 @@ function App() {
 
   return (
     <div className="App">
-      <LoginForm login={login}/>
+      <Route
+        exact path='/'
+        render={props => {
+          return <LoginForm {...props} login={login}/>;
+        }}
+      />
+      <Route 
+      path='/users'
+      render={props => {
+        return <Users {...props}/>
+      }}/>
     </div>
   );
 }

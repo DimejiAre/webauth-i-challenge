@@ -20,6 +20,7 @@ router.post('/login', async (req,res) => {
         const result = await db.loginUser(user)
         if(result){
             req.session.user = result
+            // res.cookie('foo', 'bar', {maxAge: 1000000, path:'/'})
             res.status(200).json({message: `Successfully logged in`})
         } else {
             res.status(401).json({message: 'Invalid Credentials'})

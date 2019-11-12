@@ -13,7 +13,7 @@ function LoginForm(props){
                 <Form>
                     <label htmlFor='username'>username</label>
                     <Field name='username' type='text' placeholder='username'/>
-                    <label htmlFor='password'>username</label>
+                    <label htmlFor='password'>password</label>
                     <Field name='password' type='password' placeholder='password'/>
                     <button type='submit'>Log In</button>
                 </Form>
