@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const helmet = require('helmet');
+const cors = require('cors');
 var session = require('express-session');
 const KnexSessionStore = require('connect-session-knex')(session);
 
@@ -27,6 +28,7 @@ const sessionConfig = {
 }
 
 server.use(helmet());
+server.use(cors());
 server.use(express.json());
 server.use(session(sessionConfig))
 server.use('/api/auth', auth);
