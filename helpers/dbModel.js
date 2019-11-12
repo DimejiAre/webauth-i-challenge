@@ -23,5 +23,5 @@ async function loginUser(user){
 }
 
 function getUsers(){
-    return db('users')
+    return db('users').select('id', 'username', 'email')
 }
