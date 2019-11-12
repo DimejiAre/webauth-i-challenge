@@ -1,7 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const helmet = require('helmet');
-var session = require('express-session')
+var session = require('express-session');
+const KnexSessionStore = require('connect-session-knex')(session);
 
 const server = express();
 const auth = require('./routers/authentication');
@@ -15,7 +16,14 @@ const sessionConfig = {
     cookie: {
         expires: 1000 * 60 * 5,
         secure: false
-    }
+    },
+    store: new KnexSessionStore({
+        knex: require('./data/db-Config'),
+        tablename: 'sessions',
+        sidfieldname: 'sid',
+        createtable: true,
+        clearInterval: 1000 * 60 * 60
+      })
 }
 
 server.use(helmet());
