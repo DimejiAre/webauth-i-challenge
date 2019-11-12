@@ -19,13 +19,28 @@ router.post('/login', async (req,res) => {
         const user = req.body;
         const result = await db.loginUser(user)
         if(result){
-            res.status(200).json({message: `Logged in`})
+            req.session.user = result
+            res.status(200).json({message: `Successfully logged in`})
         } else {
-            res.status(401).json({message: 'You shall not pass!'})
+            res.status(401).json({message: 'Invalid Credentials'})
         }       
     }
     catch (error){
         res.status(500).json({error: `An error occurred during login. ${error}`})
+    }
+})
+
+router.get('/logout', (req,res) => {
+    if(req.session){
+        req.session.destroy( err => {
+            if(err){
+                res.json({error: `could not log you out ${err}`})
+            } else {
+                res.json({message: `successfully logged out`})
+            }
+        })
+    } else {
+        res.end();
     }
 })
 

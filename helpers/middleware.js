@@ -1,19 +1,13 @@
-const db = require('./dbModel');
-
 module.exports = {
     restricted
 }
 
 async function restricted (req,res,next){
     try{
-        const {username, password} = req.headers
-        const payload = {username, password }
-
-        const result = await db.loginUser(payload)
-        if(result){
+        if(req.session && req.session.user){
             next()
         } else {
-            res.status(401).json({message: 'Invalid Credentials'})
+            res.status(401).json({message: 'You do not have permission to access this data'})
         }
     }
     catch(error) {
