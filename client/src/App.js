@@ -10,7 +10,7 @@ function App() {
   const login = (formValue, actions) => {
     console.log(formValue)
     const newUser = {
-      name: formValue.name,
+      username: formValue.username,
       password: formValue.password,
     }
 
